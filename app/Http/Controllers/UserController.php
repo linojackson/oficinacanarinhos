@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('listAllUsers', ['users' => $users]);
+        return view('site.users', ['users' => $users]);
     }
 
     /**
@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('newUser');
+        return view('admin.formRegisterUser');
     }
 
     /**
@@ -46,7 +46,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('user.index');
+        return redirect()->route('site.home');
     }
 
     /**

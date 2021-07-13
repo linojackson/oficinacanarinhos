@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ Route::get('/produtos', function () {
     return view('site.products');
 })->name('site.products');
 
-Route::get('/clientes', function () {
+Route::get('/usuarios/listar', function () {
     return view('site.users');
 })->name('site.users');
 
@@ -40,3 +41,5 @@ Route::get('/admin', [AuthController::class, 'dashboard'])->name('admin');
 Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
 Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 Route::post('admin/login/do', [AuthController::class, 'login'])->name('admin.login.do');
+
+Route::resource('usuarios', UserController::class)->names('user')->parameters(['usuarios' => 'users']);

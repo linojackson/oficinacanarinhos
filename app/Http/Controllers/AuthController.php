@@ -9,7 +9,7 @@ class AuthController extends Controller
 {
     public function dashboard(){
         if (Auth::check() === true) {
-            return view('admin.dashboard');
+            return view('site.home');
         }
         return redirect()->route('admin.login');
     }
@@ -39,6 +39,6 @@ class AuthController extends Controller
     public function logout(){
         Auth::logout();
 
-        return redirect()->route('admin');
+        return redirect()->route('site.home');
     }
 }

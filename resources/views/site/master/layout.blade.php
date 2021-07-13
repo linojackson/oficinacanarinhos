@@ -79,7 +79,7 @@
             <li>
               <a href="{{ route('site.users') }}" class="nav-link {{ (Route::current()->getName() === 'site.users' ? 'text-secondary' : 'text-white')}}">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24" style="fill:white;"><use xlink:href="#people-circle"/></svg>
-                Clientes
+                Usuários
               </a>
             </li>
           </ul>
@@ -90,17 +90,27 @@
       <div class="container d-flex flex-wrap justify-content-center">
         <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
         @if(date('H') > 0 && date('H') < 12)
-        	<h4>Bom dia!</h4>
+        	<h4>Bom dia
         @elseif(date('H') > 11 && date('H') < 17)
-        	<h4>Boa Tarde!</h4>
+        	<h4>Boa Tarde
         @else
-        	<h4>Boa Noite!</h4>
+        	<h4>Boa Noite
+        @endif
+        @if(Auth::check())
+            {{Auth::user()->name}}
+        @else
+            </h4>
         @endif
         </div>
 
         <div class="text-end">
-          <a href="#" type="button" class="btn btn-light text-dark me-2">Login</a>
-          <a href="#" type="button" class="btn btn-primary">Registrar</a>
+          @if(!Auth::check())
+            <a href="{{ route('admin'); }}" type="button" class="btn btn-light text-dark me-2">Login</a>
+            <a href="{{ route('user.create')}}" type="button" class="btn btn-primary">Registrar</a>
+          @else
+            <a href="{{ route('admin.logout'); }}" type="button" class="btn btn-primary">Logout</a>
+            <a href="#" type="button" class="btn btn-light text-dark me-2">Seu perfil</a>
+          @endif
         </div>
       </div>
     </div>
